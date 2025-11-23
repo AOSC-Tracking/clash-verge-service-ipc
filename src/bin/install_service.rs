@@ -152,9 +152,7 @@ fn main() -> Result<(), Error> {
 
     let debug = env::args().any(|arg| arg == "--debug");
 
-    let service_binary_path = env::current_exe()
-        .unwrap()
-        .with_file_name("clash-verge-service");
+    let service_binary_path = Path::new("/usr/bin/clash-verge-service");
 
     if !service_binary_path.exists() {
         return Err(anyhow::anyhow!("clash-verge-service binary not found"));
