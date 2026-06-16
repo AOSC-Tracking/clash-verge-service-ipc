@@ -381,7 +381,10 @@ fn create_ipc_router() -> Result<Router> {
             trace!("Received StartClash command");
             ipc_request_context_to_auth_context(&ctx)?;
             match ctx.json::<ClashConfig>() {
-                Ok(start_clash) => {
+                Ok(mut start_clash) => {
+                    start_clash.core_config.core_path = "/usr/bin/mihomo".to_string();
+                    start_clash.core_config.core_ipc_path =
+                        "/tmp/verge/verge-mihomo.sock".to_string();
                     match CORE_MANAGER
                         .lock()
                         .await

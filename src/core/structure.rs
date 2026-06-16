@@ -68,16 +68,9 @@ pub struct Response<T> {
 
 impl Default for CoreConfig {
     fn default() -> Self {
-        let core_ipc_path = if cfg!(windows) {
-            r"\\.\pipe\verge-mihomo".to_string()
-        } else if cfg!(feature = "test") {
-            "/tmp/clash-verge-service-ipc-test/mihomo.sock".to_string()
-        } else {
-            "/tmp/verge/verge-mihomo.sock".to_string()
-        };
         Self {
-            core_path: "./clash".to_string(),
-            core_ipc_path,
+            core_path: "/usr/bin/mihomo".to_string(),
+            core_ipc_path: "/tmp/verge/verge-mihomo.sock".to_string(),
             config_path: "./config.yaml".to_string(),
             config_dir: "./configs".to_string(),
         }
